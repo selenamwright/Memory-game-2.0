@@ -5,7 +5,7 @@ import random
 # Initialize Pygame
 pygame.init()
 
-# Set window size and caption
+# Window size and caption
 size = (500, 700)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Memory Game")
@@ -32,10 +32,10 @@ for i in range(5):
     cards.append(i)
 random.shuffle(cards)
 
-# Create a list to store the cards that have been flipped
+# List to store the cards that have been flipped
 flipped_cards = []
 
-# Create a list to store the cards that have been matched
+# List to store the cards that have been matched
 matched_cards = []
 
 # Initialize variables for the game loop
@@ -57,7 +57,7 @@ while running:
         else:
             pygame.draw.rect(screen, (0, 0, 255), (x, y, 75, 100))
 
-    # Check for mouse clicks
+    # Mouse clicks
     if pygame.mouse.get_pressed()[0]:
         pos = pygame.mouse.get_pos()
         for i in range(len(cards)):
@@ -80,7 +80,7 @@ while running:
 # Exit Pygame
 pygame.quit()), 
 
-# Create a list of cards
+# List of cards
 cards = []
 for i in range(5):
     cards.append(i)
@@ -112,7 +112,7 @@ while running:
         else:
             pygame.draw.rect(screen, (0, 0, 255), (x, y, 75, 100))
 
-    # Check for mouse clicks
+    # Mouse clicks
     if pygame.mouse.get_pressed()[0]:
         pos = pygame.mouse.get_pos()
         for i in range(len(cards)):
