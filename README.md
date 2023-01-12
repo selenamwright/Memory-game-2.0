@@ -78,10 +78,7 @@ while running:
     pygame.display.update()
 
 # Exit Pygame
-pygame.quit()), pygame.image.load("image2.jpg"), pygame.image.load("image3.jpg"),
-               pygame.image.load("image4.jpg"), pygame.image.load("image5.jpg"), pygame.image.load("image6.jpg"),
-               pygame.image.load("image7.jpg"), pygame.image.load("image8.jpg"), pygame.image.load("image9.jpg"),
-               pygame.image.load("image10.jpg")]
+pygame.quit()), 
 
 # Create a list of cards
 cards = []
