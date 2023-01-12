@@ -1,25 +1,72 @@
 # Memory-game-2.0
+import pygame
 import random
 
-cards = [1, 1, 2, 2, 3, 3]
+# Initialize Pygame
+pygame.init()
+
+# Set window size and caption
+size = (500, 700)
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption("Memory Game")
+
+# Load card images
+card_images = [pygame.image.load("image1.jpg"), pygame.image.load("image2.jpg"), pygame.image.load("image3.jpg"),
+               pygame.image.load("image4.jpg"), pygame.image.load("image5.jpg"), pygame.image.load("image6.jpg"),
+               pygame.image.load("image7.jpg"), pygame.image.load("image8.jpg"), pygame.image.load("image9.jpg"),
+               pygame.image.load("image10.jpg")]
+
+# Create a list of cards
+cards = []
+for i in range(5):
+    cards.append(i)
+    cards.append(i)
 random.shuffle(cards)
 
-picked_cards = []
-while len(picked_cards) < len(cards):
-    print("Current board: ", ["X" if i not in picked_cards else str(cards[i]) for i in range(len(cards))])
-    try:
-        input1 = int(input("Pick a card by its index: "))
-        input2 = int(input("Pick another card by its index: "))
-        if input1 not in picked_cards and input2 not in picked_cards:
-            if cards[input1] == cards[input2]:
-                picked_cards.append(input1)
-                picked_cards.append(input2)
-                print("You found a match!")
-            else:
-                print("Sorry, try again.")
-        else:
-            print("You have already picked that card. Try again.")
-    except ValueError:
-        print("Invalid input. Please enter a number.")
+# Create a list to store the cards that have been flipped
+flipped_cards = []
 
-print("Congratulations, you found all the matches!")
+# Create a list to store the cards that have been matched
+matched_cards = []
+
+# Initialize variables for the game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Draw background
+    screen.fill((255, 255, 255))
+
+    # Draw cards
+    for i in range(len(cards)):
+        x = 50 + i * 100
+        y = 200
+        if i in flipped_cards:
+            screen.blit(card_images[cards[i]], (x, y))
+        else:
+            pygame.draw.rect(screen, (0, 0, 255), (x, y, 75, 100))
+
+    # Check for mouse clicks
+    if pygame.mouse.get_pressed()[0]:
+        pos = pygame.mouse.get_pos()
+        for i in range(len(cards)):
+            x = 50 + i * 100
+            y = 200
+            if x < pos[0] < x + 75 and y < pos[1] < y + 100:
+                if i not in flipped_cards and i not in matched_cards:
+                    flipped_cards.append(i)
+                    if len(flipped_cards) == 2:
+                        if cards[flipped_cards[0]] == cards[flipped_cards[1]]:
+                            matched_cards.append(flipped_cards[0])
+                            matched_cards.append(flipped_cards[1])
+                            flipped_cards = []
+                            if len(matched_cards) == len(cards):
+                                print("Congratulations, you found all the matches!")
+                        else:
+                            flipped_cards = []
+    pygame.display.update()
+
+# Exit Pygame
+pygame.quit()
