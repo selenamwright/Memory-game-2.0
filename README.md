@@ -1,5 +1,5 @@
 # Memory-game-2.0
-import pygame
+pip install pygame
 import random
 
 # Initialize Pygame
